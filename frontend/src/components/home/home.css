@@ -1,0 +1,97 @@
+.body{
+    margin:0;
+    display:flex;
+    align-items:center;
+}
+
+.thin-lines{
+    height:90vh;
+    width:97vw;
+    margin-top:30px;
+    margin-left:20px;
+  
+    box-sizing: border-box;
+  
+  
+    border:1px solid black;
+   
+   
+  }
+  .vertical-line{
+    border:1px solid black;
+    margin-top:20px;
+    
+  }
+.heading{
+height:95px;
+width:500px;
+margin-left:200px;
+font-size:70px;
+}
+
+
+.signout{
+  color:rgb(218, 33, 156);
+  text-decoration: none;
+  margin-left:78vw;
+ 
+}
+
+
+.straight-line{
+  border:1px solid black;
+  box-sizing: border-box;
+  width:30px
+  
+}
+.table {
+ background-color: #fafafa; /* Adjust border color if needed */
+  width: 90vw;
+  height: 60px; /* Adjust height as needed */
+  margin: 150px auto;
+}
+td {
+  border: 3px solid #fafafa;
+  padding: 15px 16px 15px 15px
+}
+
+
+
+.thead {
+  background-color:#3d4ee7; /* Light gray background for header */
+  color: #e7e7e7; /* Darker text for header */
+}
+
+.cell {
+  border: 1px solid rgb(245, 245, 245); /* Add bottom border for cells */
+  padding: 15px 15px 15px 15px;/* Adjust padding as needed */
+  background-color:lightblue
+}
+
+.action-link {
+  color: #444; /* Darker text for action links */
+  text-decoration: none;
+  padding: 5px 10px; /* Adjust padding as needed */
+  margin-right: 10px; /* Spacing between action links */
+}
+.linkcell{
+  border:1px solid rgb(247, 247, 247);
+  width: auto;
+  padding: 15px 15px 15px 15px;
+  background-color:lightblue
+  
+}
+.linkcell a{
+  color:rgb(218, 33, 156);
+  text-decoration: none;
+}
+.line{
+  margin-left:65vw;
+  padding: 10px 10px 10px 10px;
+  background-color: #3d4ee7;
+  
+}
+.linep{
+ transform:translate(0px,110px);
+ color:rgb(218, 33, 156);
+}
