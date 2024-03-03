@@ -10,14 +10,12 @@ module.exports = function(req, res, next) {
             return res.status(401).json({ message: 'Token not found' });
         }
 
-        jwt.verify(token, SECRET_KEY, (err, decoded) => {
-            if (err) {
-                return res.status(401).json({ message: 'Invalid token' });
-            }
-            req.userId = decoded.userId;
+      let decode=jwt.verify(token, SECRET_KEY)
+          
+            req.user = decode.user;
             next();
-        });
+     
     } catch (err) {
         res.status(500).json({ err: 'Internal Server Error' });
     }
-};
+}
