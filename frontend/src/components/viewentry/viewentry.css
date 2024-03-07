@@ -28,3 +28,8 @@
     padding-bottom:30px;
     transform:translate(0px,60px)
   } 
+  .icon{
+   
+   transform:translate(-400px,200px);
+   width:200px
+  }

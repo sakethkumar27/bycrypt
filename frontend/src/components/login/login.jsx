@@ -28,8 +28,7 @@ const LoginForm = () => {
     }
     catch (e) {
       console.error(e);
-
-
+      alert("invalid username or password")
     }
 
 

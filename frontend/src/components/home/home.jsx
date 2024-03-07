@@ -7,7 +7,9 @@ export const HOME = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [entries, setEntries] = useState([]);
+  
 
+const id=useParams()
 
 
 
@@ -40,16 +42,24 @@ export const HOME = () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this entry?');
     if (confirmDelete) {
         try {
-            const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:8000/deleteentry/${id}`, { headers: { 'x-token': token } });
-            // Remove the deleted entry from the state
-            setEntries(entries.filter(entry => entry._id !== id));
-            console.log('Entry deleted successfully');
+            await axios.delete(`http://localhost:8000/deleteentry/${id}`)
+            
+            // Update state with the entries array excluding the deleted entry
+            .then(res=>{console.log(res)
+            window.location.reload()})
+            .catch(err=>{console.error(err)})
         } catch (error) {
             console.error('Error deleting entry:', error);
         }
     }
 };
+
+const handleSignOut = () => {
+  localStorage.removeItem('token'); // Remove authentication token from local storage
+  localStorage.removeItem('uuid1'); // Remove user ID from local storage
+  navigate('/login'); // Redirect to login page
+};
+
 
 
 
@@ -60,16 +70,19 @@ export const HOME = () => {
         <div className="vertical-line"></div>
         <div className="name">
           <p className="greet">
-            Welcome {location.state && location.state.id}{' '}
-            <a className="signout" href="/login">
-              signout{' '}
+            Welcome {location.state && location.state.id}
+            <a className="signout" onClick={handleSignOut}>
+              logout
             </a>
           </p>
         </div>
 
         <div>
           <p className="linep">
-            List of past entries{' '}
+            
+            List of past entries
+            
+            
             <button className="line" onClick={addEntryButton}>
               Add Entries
             </button>
@@ -96,7 +109,7 @@ export const HOME = () => {
 
                   </td>
                   <td className="linkcell">
-                  <Link to={`/delete/${entry._id}`}>delete</Link>
+                  <button onClick={() => deleteEntry(entry._id)}>delete</button>
                   </td>
                 </tr>
               ))}

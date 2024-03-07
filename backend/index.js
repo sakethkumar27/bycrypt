@@ -130,17 +130,24 @@ app.post("/api/getuser", middleware, async (req, res) => {
 });
 
 // Add a route to handle entry deletion
-app.delete('/deleteentry/:id', middleware, async (req, res) => {
+ // Import the Entry model
+
+app.delete('/deleteentry/:id', async (req, res) => {
     const id = req.params.id;
+    
     try {
         // Find the entry by ID and delete it
-        await entry.findByIdAndDelete(id);
-        res.json({ success: true, message: 'Entry deleted successfully' });
+        const deletedEntry = await entry.findByIdAndDelete(id);
+        if (!deletedEntry) {
+            return res.status(404).json({ success: false, message: 'Entry not found' });
+        }
+        res.json({ success: true, message: 'Entry deleted successfully', data: deletedEntry });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ success: false, error: 'Internal Server Error' });
     }
 });
+
 // Assuming you have implemented middleware for token validation and UUID extraction
 
 // Update route to update an entry by ID
@@ -176,6 +183,7 @@ app.put('/update/:id', middleware, async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
+  
 
 
 
