@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 
 
 const signin = new mongoose.Schema({
-  username: { type: String, required: true },
-  password: { type: String, required: true },
-  
+ uuid1:{type:String},
+  username: { type: String},
+  password: { type: String},
 });
 
 console.log("MongoDB connected");

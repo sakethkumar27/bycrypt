@@ -11,15 +11,15 @@ const RegistrationForm = () => {
   const [password, setPassword] = useState()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    fetchUsers()
-  }, [])
+  // useEffect(() => {
+  //   fetchUsers()
+  // }, [])
 
- const fetchUsers=()=>{
-  axios.get("http://localhost:8000/register")
-  .then(res => console.log(res.data))
-  .catch(err => { console.error(err) })
- } 
+//  const fetchUsers=()=>{
+//   axios.get("http://localhost:8000/register")
+//   .then(res => console(res.data))
+//   .catch(err => { console.error(err) })
+//  } 
 
 
   const handleSubmit = (e) => {
@@ -30,9 +30,8 @@ const RegistrationForm = () => {
     .then(() => {
         alert('Registration Successful')
        
-        setUsername('')
-        setPassword('')
-        fetchUsers();
+        
+        // fetchUsers();
         navigate('/login')
     })
     .catch((error) => {

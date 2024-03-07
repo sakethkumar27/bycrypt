@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState } from 'react';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
@@ -10,27 +10,21 @@ const LoginForm = () => {
   const [password, setPassword] = useState('')
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchUsers()
-  }, [])
+ 
 
- const fetchUsers=()=>{
-  axios.get("http://localhost:8000/register")
-  .then(res => console.log(res.data))
-  
- } 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     try {
-     const response=axios.post("http://localhost:8000/login",{username,password})
+     const response= await axios.post("http://localhost:8000/login",{username,password})
     const token=response.data.token
     console.log(token)
     setUsername('')
     setPassword('')
-    fetchUsers()
+    
     alert("sucessfully loged in ")
-    localStorage.setItem('token:',token)
+    localStorage.setItem('token',token)
+
+    navigate('/home')
     }
     catch (e) {
       console.error(e);
