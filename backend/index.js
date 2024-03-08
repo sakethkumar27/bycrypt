@@ -69,7 +69,6 @@ app.post('/login',async(req,res)=>{
         if(!ispasswordvalid){
             res.status(401).json({message:"invalid credentials"})
         }
-        console.log("uuid1 in login",user.uuid1)
         let payload={userid:user._id,uuid1:user.uuid1}
         
         jwt.sign(payload,SECRET_KEY,
@@ -91,8 +90,7 @@ app.post('/login',async(req,res)=>{
 app.get('/home', middleware, async (req, res) => {
     try {
         const user = await register.findById(req.user);
-        console.log("requser",req.user)
-        console.log("uuid",req.uuid1)
+       
 
         if (!user) {
             return res.status(401).json("User not found");
@@ -109,7 +107,7 @@ app.post('/addentry', middleware, async (req, res) => {
         const uuid1 = req.uuid1; // Use 'uuid' to store req.uuid1
         await entry.create({ uuid1, date, description });
         res.json({ uuid1, date, description });
-        console.log(req.body);
+        
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });

@@ -21,7 +21,7 @@ export const Entry = () => {
         { headers: { 'x-token': token } } // Include the token in the request headers with 'x-token' header
       );
 
-      console.log(res.data);
+     
       localStorage.setItem('uuid',res.data.uuid1)
       //setUuid1(res.data.uuid1);
       navigate('/home'); // Navigate to the home page after successful entry addition

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './registrationform.css'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import icon from './icon.png';
 
 
 
@@ -15,29 +16,29 @@ const RegistrationForm = () => {
   //   fetchUsers()
   // }, [])
 
-//  const fetchUsers=()=>{
-//   axios.get("http://localhost:8000/register")
-//   .then(res => console(res.data))
-//   .catch(err => { console.error(err) })
-//  } 
+  //  const fetchUsers=()=>{
+  //   axios.get("http://localhost:8000/register")
+  //   .then(res => console(res.data))
+  //   .catch(err => { console.error(err) })
+  //  } 
 
 
   const handleSubmit = (e) => {
 
     e.preventDefault();
     axios
-    .post('http://localhost:8000/register', {  username, password })
-    .then(() => {
+      .post('http://localhost:8000/register', { username, password })
+      .then(() => {
         alert('Registration Successful')
-       
-        
+
+
         // fetchUsers();
         navigate('/login')
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         console.log('Unable to register user')
-    })
-    
+      })
+
 
   }
 
@@ -46,12 +47,23 @@ const RegistrationForm = () => {
     <>
       <div className="thin-lines">
         <div className="heading">
-          MyDiary App
+          <div className="icon-container">
+            <img className="icon1" alt="icon" src={icon} />
+            <span className="app-title">My Diary App</span>
+          </div>
         </div>
-        <div className="vertical-line"></div>
+
+
+        <div className="vertical-line">
+
+        </div>
+
+
         <div className="signup-block">
+
           <div id="menu" className="registration-form">
             <p>Registration Form</p>
+
 
             <form method="POST" onSubmit={handleSubmit}>
 

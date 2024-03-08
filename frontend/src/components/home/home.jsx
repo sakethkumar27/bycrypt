@@ -23,7 +23,6 @@ const id=useParams()
       const token = localStorage.getItem('token');
       const uuid1 = localStorage.getItem('uuid1')// Get the JWT token from localStorage
       const response = await axios.post('http://localhost:8000/api/getuser', { uuid1 }, { headers: { 'x-token': token } }); // Make POST request to server with UUID in the request body and token in headers
-      console.log(response.data)
       setEntries(response.data); // Update entries state with received data
     } catch (error) {
       console.error('Error fetching entries:', error);

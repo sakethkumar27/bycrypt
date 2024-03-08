@@ -17,7 +17,7 @@ const LoginForm = () => {
     try {
      const response= await axios.post("http://localhost:8000/login",{username,password})
     const token=response.data.token
-    console.log(token)
+   
     setUsername('')
     setPassword('')
     
