@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './viewentry.css';
-import icon from './icon.png';
+import icon2 from './icon.png';
 
 
 
@@ -23,21 +23,29 @@ const Viewentry = () => {
 
     fetchData();
   }, [id]);
+  function backtohome(){
+    navigate('/home')
+  }
 
   return (
 
- <div className="thin-lines">
-        <div className="heading">
-          MyDiary App
+    <div className="view-border">
+    <div className="view-entry-container">
+      <img alt="" src={icon2} className="view-icon" />
+      <p className="view-diary-title">MyDiary App</p>
+    </div>
+    <div className="view-h-line"></div>
+    <div className='view-addentry'>
+      <h2 className="view-add-entry-heading">View Entry</h2>
+      <div className="view-date">
+      <p>Date: {new Date(entry.date).toLocaleDateString('en-GB')}</p>
         </div>
-        <div className="vertical-line"></div>
-        <h1 style={{ color: 'rgb(218, 33, 156)' }}>View Entry</h1>
-        <img className="icon"alt="icon" src={icon} />
-
-
-      <h2>Date: {new Date(entry.date).toLocaleDateString('en-GB')}</h2>
-      <h2>Description: {entry.description}</h2>
-      <button onClick={() => navigate('/home')}>Back to Home</button>
+      <div className="view-des">
+        <label htmlFor="view-description" className="view-des-label">Description</label>
+        <div id="view-description" className="view-des-box">{entry.description}</div>
+      </div>
+      <button className="view-to-home" onClick={backtohome}> back to home</button>
+    </div>
   </div>
      
     

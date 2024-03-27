@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './home.css';
+import icon from './icon.png'
 import { useLocation, useNavigate, Link, useParams } from 'react-router-dom';
 import axios from 'axios'; // Import axios for making HTTP requests
 
@@ -7,6 +8,7 @@ export const HOME = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [entries, setEntries] = useState([]);
+  const username = location.state && location.state.username ? location.state.username : localStorage.getItem('username')
   
 
 const id=useParams()
@@ -64,13 +66,16 @@ const handleSignOut = () => {
 
   return (
     <>
-      <div className="thin-lines">
-        <div className="heading">MyDiary App</div>
-        <div className="vertical-line"></div>
+      <div className="border">
+        <div className="heading">
+        <img className="icon1" alt="icon" src={icon} />
+        <p className="diary1">MyDiary App</p>
+        </div>
+        <div className="standing-line"></div>
         <div className="name">
           <p className="greet">
-            Welcome {location.state && location.state.id}
-            <a className="signout" onClick={handleSignOut}>
+            Welcome {username}
+            <a className="logout" onClick={handleSignOut}>
               logout
             </a>
           </p>
@@ -104,11 +109,13 @@ const handleSignOut = () => {
                   </td>
                   <td className="linkcell">
                     {/* Link to the update page with the entry ID included in the URL */}
-                    <Link to={`/update/${entry._id}`}>update</Link>
+                
+                   <Link to={`/update/${entry._id}`}>Update</Link>
+                    
 
                   </td>
-                  <td className="linkcell">
-                  <button onClick={() => deleteEntry(entry._id)}>delete</button>
+                  <td className="linkcell ">
+                  <button  className="delete"onClick={() => deleteEntry(entry._id)}>Delete</button>
                   </td>
                 </tr>
               ))}

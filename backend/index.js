@@ -57,33 +57,32 @@ app.get("/register",async(req,res)=>{
         res.status(500).json({err:"unable to get users"})
     }
 })
-app.post('/login',async(req,res)=>{
-    try{
-        const {username,password}=req.body
-       const user=await register.findOne({username})
+app.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const user = await register.findOne({ username });
 
-       if(!user){
-        res.status(401).json({message:"Invalid credentials"})
-       }
-     const ispasswordvalid=await bcrypt.compare(password,user.password)
-        if(!ispasswordvalid){
-            res.status(401).json({message:"invalid credentials"})
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(401).json({ message: "Invalid credentials" });
         }
-        let payload={userid:user._id,uuid1:user.uuid1}
+
+        let payload = { userid: user._id, uuid1: user.uuid1 };
         
-        jwt.sign(payload,SECRET_KEY,
-        (err,token)=>{
-            if (err) throw err;
-            return res.json({token})
-        }
-        )
+        jwt.sign(payload, SECRET_KEY, (err, token) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ err: "Error signing token" });
+            }
+            return res.json({ token });
+        });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ err: "Error in login" });
     }
+});
 
-    catch(err){
-        res.status(500).json({err:"error in login"})
-    }
-})
 
+ 
 
 
 // Use middleware for routes that require authentication

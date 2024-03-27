@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
+import icon from './icon.png';
 
 
 
@@ -17,14 +18,17 @@ const LoginForm = () => {
     try {
      const response= await axios.post("http://localhost:8000/login",{username,password})
     const token=response.data.token
+ 
    
     setUsername('')
     setPassword('')
     
     alert("sucessfully loged in ")
     localStorage.setItem('token',token)
+    localStorage.setItem('username',username)
 
-    navigate('/home')
+
+    navigate('/home', { state: { username } });
     }
     catch (e) {
       console.error(e);
@@ -38,23 +42,25 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className="thin-lines">
-        <div className="heading">
-          MyDiary App
+      <div className="lines">
+        <div className="headings">
+        <img className="icon1" alt="icon" src={icon} />
+        <p className="diary">My Diary App</p>
         </div>
-        <div className="vertical-line"></div>
+        <div className="sleeping-line"></div>
 
         <div className="block">
+        
           <div id="menu" className="register-form">
-            <p>Login Here</p>
+          <img alt="" className="book1" src="https://uxwing.com/wp-content/themes/uxwing/download/education-school/open-book-icon.png"/><p>Login Here</p>
             <form  onSubmit={handleSubmit}>
-              <div className="userNAme"> Username
-                <input className="search-box" type="username"onChange={(e) => { setUsername(e.target.value) }} required />
+              <div className="userNAme">Username
+                <input className="search-box" type="username"onChange={(e) => { setUsername(e.target.value) }}  required />
               </div>
-              <div className="passwords"> Password
+              <div className="passwords">Password
                 <input className="password-input-box" type="password" onChange={(e) => { setPassword(e.target.value) }} required />
               </div>
-              <div>
+              <div className="submit">
 
                 <button className="submit-button"  >LOGIN</button>
                 <div className="links">New User? Register

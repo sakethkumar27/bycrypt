@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import './registrationform.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
@@ -12,15 +12,6 @@ const RegistrationForm = () => {
   const [password, setPassword] = useState()
   const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   fetchUsers()
-  // }, [])
-
-  //  const fetchUsers=()=>{
-  //   axios.get("http://localhost:8000/register")
-  //   .then(res => console(res.data))
-  //   .catch(err => { console.error(err) })
-  //  } 
 
 
   const handleSubmit = (e) => {
@@ -30,9 +21,6 @@ const RegistrationForm = () => {
       .post('http://localhost:8000/register', { username, password })
       .then(() => {
         alert('Registration Successful')
-
-
-        // fetchUsers();
         navigate('/login')
       })
       .catch((error) => {
@@ -45,26 +33,22 @@ const RegistrationForm = () => {
 
   return (
     <>
-      <div className="thin-lines">
+       <div className="full">
+       <div className="thin-line">
         <div className="heading">
           <div className="icon-container">
             <img className="icon1" alt="icon" src={icon} />
-            <span className="app-title">My Diary App</span>
+            <p className="app-title">My Diary App</p>
           </div>
         </div>
-
-
-        <div className="vertical-line">
-
-        </div>
-
-
+        <div className="vertical-lines"></div>
         <div className="signup-block">
+          
 
-          <div id="menu" className="registration-form">
-            <p>Registration Form</p>
+          <div  className="registration-form">
+          <img  className='book'  alt=""src="https://uxwing.com/wp-content/themes/uxwing/download/education-school/open-book-icon.png"/><p>Registration Form</p>
 
-
+                
             <form method="POST" onSubmit={handleSubmit}>
 
               <div className="username"> Username
@@ -77,14 +61,18 @@ const RegistrationForm = () => {
                 <button className="register-button" type="submit">Register</button>
 
                 <div className="link">Existing User? login
-                  <a href="/login">here</a>
+                  <a href="/login"> here</a>
                 </div>
 
               </div>
             </form>
           </div>
         </div>
-      </div>
+        </div>
+       </div>
+     
+  
+
 
     </>
 
